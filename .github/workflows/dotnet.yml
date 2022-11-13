@@ -1,0 +1,53 @@
+name: .NET
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.0.x
+        include-prerelease: false 
+
+     # Add NuGet Sources
+
+    - name: Create Local NuGet Directory
+      run: mkdir ~/nuget
+
+    - name: Add Local Nuget Source
+      run: dotnet nuget add source ~/nuget
+
+    - name: Add GGroupp NuGet Source
+      run: dotnet nuget add source ${{ secrets.GG_NUGET_SOURCE_URL }} -n ggroupp -u ${{ secrets.GG_NUGET_SOURCE_USER_NAME }} -p ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }} --store-password-in-clear-text
+
+    # FlatArray.Extensions
+
+    - name: Restore FlatArray.Extensions
+      run: dotnet restore ./src/*/FlatArray.Extensions.csproj
+
+    - name: Build FlatArray.Extensions
+      run: dotnet build ./src/*/FlatArray.Extensions.csproj --no-restore  -c Release
+
+    - name: Pack FlatArray.Extensions
+      run: dotnet pack ./src/*/FlatArray.Extensions.csproj --no-restore -o ~/nuget  -c Release
+
+    # FlatArray.Extensions.Tests
+
+    - name: Restore FlatArray.Extensions.Tests
+      run: dotnet restore ./src/*/FlatArray.Extensions.Tests.csproj
+
+    - name: Test FlatArray.Extensions.Tests
+      run: dotnet test ./src/*/FlatArray.Extensions.Tests.csproj --no-restore  -c Release
+
+    # Push
+
+    - name: Push Packages
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: dotnet nuget push "../../../nuget/*.nupkg" -s ${{ secrets.GG_NUGET_SOURCE_URL }} -k ${{ secrets.GG_NUGET_SOURCE_USER_PASSWORD }} --skip-duplicate
