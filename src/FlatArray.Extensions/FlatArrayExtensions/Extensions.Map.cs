@@ -14,15 +14,15 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var results = new TResult[source.Length];
+        var builder = FlatArray<TResult>.Builder.Create(source.Length);
         var index = 0;
 
         foreach (var sourceItem in source)
         {
-            results[index] = map.Invoke(sourceItem);
+            builder[index] = map.Invoke(sourceItem);
             index++;
         }
 
-        return new(results);
+        return builder.Build();
     }
 }
