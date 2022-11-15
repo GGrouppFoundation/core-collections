@@ -37,7 +37,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void Map_SourceIsDefault_ExpectArrayWithMappedValues()
+    public void Map_SourceIsNotEmpty_ExpectMappedValues()
     {
         var mapper = new Dictionary<string, RecordType>
         {
