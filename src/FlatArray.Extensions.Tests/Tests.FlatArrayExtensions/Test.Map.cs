@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PrimeFuncPack.UnitTest;
 using Xunit;
+using static PrimeFuncPack.UnitTest.TestData;
 
 namespace GGroupp.Core.Collections.FlatArray.Extensions.Tests;
 
@@ -13,9 +14,10 @@ partial class FlatArrayExtensionsTest
     [InlineData(false)]
     public void Map_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
-        var source = isSourceDefault ? default : new FlatArray<int>(TestData.PlusFifteen, TestData.Zero, TestData.MinusOne);
+        var source = isSourceDefault ? default : new FlatArray<int>(PlusFifteen, Zero, MinusOne);
 
         var ex = Assert.Throws<ArgumentNullException>(Test);
+        Assert.Equal("map", ex.ParamName);
 
         void Test()
             =>
@@ -33,7 +35,7 @@ partial class FlatArrayExtensionsTest
 
         static RefType Map(RecordStruct _)
             =>
-            TestData.MinusFifteenIdRefType;
+            MinusFifteenIdRefType;
     }
 
     [Fact]
@@ -41,9 +43,9 @@ partial class FlatArrayExtensionsTest
     {
         var mapper = new Dictionary<string, RecordType>
         {
-            [TestData.SomeString] = TestData.PlusFifteenIdLowerSomeStringNameRecord,
-            [TestData.AnotherString] = TestData.ZeroIdNullNameRecord,
-            [TestData.MixedWhiteSpacesString] = TestData.MinusFifteenIdSomeStringNameRecord
+            [SomeString] = PlusFifteenIdLowerSomeStringNameRecord,
+            [AnotherString] = ZeroIdNullNameRecord,
+            [MixedWhiteSpacesString] = MinusFifteenIdSomeStringNameRecord
         };
 
         var source = new FlatArray<string>(mapper.Keys.ToArray());

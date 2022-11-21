@@ -7,7 +7,7 @@ partial class FlatArrayExtensions
 {
     public static FlatArray<TResult> Map<TSource, TResult>(this FlatArray<TSource> source, Func<TSource, TResult> map)
     {
-        _ = map ?? throw new ArgumentNullException(nameof(map));
+        ArgumentNullException.ThrowIfNull(map);
 
         if (source.IsEmpty)
         {
