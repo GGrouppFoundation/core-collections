@@ -5,11 +5,11 @@ namespace GGroupp;
 
 partial class FlatArrayExtensions
 {
-    public static Optional<T> FirstOrAbsent<T>(this FlatArray<T> array)
+    public static Optional<T> LastOrAbsent<T>(this FlatArray<T> array)
         =>
-        array.IsEmpty ? default : Optional.Present(array[0]);
+        array.IsEmpty ? default : Optional.Present(array[^1]);
 
-    public static Optional<T> FirstOrAbsent<T>(this FlatArray<T> array, Predicate<T> predicate)
+    public static Optional<T> LastOrAbsent<T>(this FlatArray<T> array, Predicate<T> predicate)
     {
         ArgumentNullException.ThrowIfNull(predicate);
 
@@ -18,8 +18,10 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        foreach (var item in array)
+        for (var i = 1; i <= array.Length; i++)
         {
+            var item = array[^i];
+
             if (predicate.Invoke(item))
             {
                 return Optional.Present(item);
