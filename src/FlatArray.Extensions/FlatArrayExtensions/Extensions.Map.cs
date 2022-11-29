@@ -14,7 +14,7 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var builder = FlatArray<TResult>.Builder.Create(source.Length);
+        var builder = FlatArray<TResult>.Builder.OfLength(source.Length);
         var index = 0;
 
         foreach (var sourceItem in source)
@@ -23,6 +23,6 @@ partial class FlatArrayExtensions
             index++;
         }
 
-        return builder.Build();
+        return builder.MoveToArray();
     }
 }
