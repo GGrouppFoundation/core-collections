@@ -25,7 +25,7 @@ partial class FlatArrayExtensionsTest
     [InlineData(AnotherString, EmptyString)]
     public void FirstOrAbsent_SourceIsNotEmpty_ExpectFirstItem(string? first, params string?[] others)
     {
-        var sourceBuilder = FlatArray<string?>.Builder.Create(others.Length + 1);
+        var sourceBuilder = FlatArray<string?>.Builder.OfLength(others.Length + 1);
         sourceBuilder[0] = first;
 
         for (var i = 0; i < others.Length; i++)
@@ -33,7 +33,7 @@ partial class FlatArrayExtensionsTest
             sourceBuilder[i + 1] = others[i];
         }
 
-        var source = sourceBuilder.Build();
+        var source = sourceBuilder.MoveToArray();
 
         var actual = source.FirstOrAbsent();
         var expected = Optional.Present(first);

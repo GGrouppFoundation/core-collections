@@ -25,7 +25,7 @@ partial class FlatArrayExtensionsTest
     [InlineData(MinusFifteen, Zero)]
     public void LastOrAbsent_SourceIsNotEmpty_ExpectLastItem(int? last, params int?[] others)
     {
-        var sourceBuilder = FlatArray<int?>.Builder.Create(others.Length + 1);
+        var sourceBuilder = FlatArray<int?>.Builder.OfLength(others.Length + 1);
 
         for (var i = 0; i < others.Length; i++)
         {
@@ -34,7 +34,7 @@ partial class FlatArrayExtensionsTest
 
         sourceBuilder[others.Length] = last;
 
-        var source = sourceBuilder.Build();
+        var source = sourceBuilder.MoveToArray();
 
         var actual = source.LastOrAbsent();
         var expected = Optional.Present(last);
