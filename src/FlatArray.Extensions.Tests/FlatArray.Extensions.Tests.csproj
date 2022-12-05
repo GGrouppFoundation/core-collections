@@ -7,7 +7,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <IsPackable>false</IsPackable>
-    <RootNamespace>GGroupp.Core.Collections.FlatArray.Extensions.Tests</RootNamespace>
+    <RootNamespace>GGroupp.Core.Collections.Tests</RootNamespace>
     <AssemblyName>GGroupp.Core.Collections.FlatArray.Extensions.Tests</AssemblyName>
   </PropertyGroup>
 
