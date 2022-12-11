@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
@@ -20,24 +19,15 @@ partial class FlatArrayExtensionsTest
     }
 
     [Theory]
-    [InlineData(null)]
-    [InlineData(null, MinusFifteen, One)]
-    [InlineData(MinusFifteen, Zero)]
-    public void LastOrAbsent_SourceIsNotEmpty_ExpectLastItem(int? last, params int?[] others)
+    [InlineData(Zero)]
+    [InlineData(MinusFifteen, One)]
+    [InlineData(null, MinusFifteen, Zero, PlusFifteen)]
+    public void LastOrAbsent_SourceIsNotEmpty_ExpectLastItem(params int?[] others)
     {
-        var sourceBuilder = FlatArray<int?>.Builder.OfLength(others.Length + 1);
-
-        for (var i = 0; i < others.Length; i++)
-        {
-            sourceBuilder[i] = others[i];
-        }
-
-        sourceBuilder[others.Length] = last;
-
-        var source = sourceBuilder.MoveToArray();
+        var source = others.ToFlatArray();
 
         var actual = source.LastOrAbsent();
-        var expected = Optional.Present(last);
+        var expected = others[^1];
 
         Assert.Equal(expected, actual);
     }

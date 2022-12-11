@@ -14,10 +14,11 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var list = new List<TResult>();
+        var list = new List<TResult>(source.Length);
 
-        foreach (var item in source)
+        for (var i = 0; i < source.Length; i++)
         {
+            var item = source[i];
             var items = map.Invoke(item);
 
             if (items.IsEmpty)
