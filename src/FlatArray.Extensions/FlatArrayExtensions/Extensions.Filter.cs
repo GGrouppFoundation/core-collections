@@ -16,12 +16,16 @@ partial class FlatArrayExtensions
 
         var list = new List<T>(array.Length);
 
-        foreach (var item in array)
+        for (var i = 0; i < array.Length; i++)
         {
-            if (predicate.Invoke(item))
+            var item = array[i];
+
+            if (predicate.Invoke(item) is false)
             {
-                list.Add(item);
+                continue;
             }
+
+            list.Add(item);
         }
 
         return list;

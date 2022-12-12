@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace GGroupp;
 
@@ -22,10 +21,12 @@ partial class FlatArrayExtensions
         {
             var item = array[^i];
 
-            if (predicate.Invoke(item))
+            if (predicate.Invoke(item) is false)
             {
-                return Optional.Present(item);
+                continue;
             }
+
+            return Optional.Present(item);
         }
 
         return default;

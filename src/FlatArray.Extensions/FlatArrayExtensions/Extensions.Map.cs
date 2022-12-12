@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace GGroupp;
 
@@ -14,15 +13,14 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var builder = FlatArray<TResult>.Builder.OfLength(source.Length);
-        var index = 0;
+        var result = new TResult[source.Length];
 
-        foreach (var sourceItem in source)
+        for (var i = 0; i < source.Length; i++)
         {
-            builder[index] = map.Invoke(sourceItem);
-            index++;
+            var sourceItem = source[i];
+            result[i] = map.Invoke(sourceItem);
         }
 
-        return builder.MoveToArray();
+        return result;
     }
 }

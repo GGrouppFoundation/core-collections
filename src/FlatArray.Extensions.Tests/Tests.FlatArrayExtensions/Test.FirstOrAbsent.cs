@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
-namespace GGroupp.Core.Collections.FlatArray.Extensions.Tests;
+namespace GGroupp.Core.Collections.Tests;
 
 partial class FlatArrayExtensionsTest
 {
@@ -20,23 +19,15 @@ partial class FlatArrayExtensionsTest
     }
 
     [Theory]
-    [InlineData(null)]
-    [InlineData(null, SomeString, AnotherString)]
+    [InlineData(EmptyString)]
     [InlineData(AnotherString, EmptyString)]
-    public void FirstOrAbsent_SourceIsNotEmpty_ExpectFirstItem(string? first, params string?[] others)
+    [InlineData(null, SomeString, AnotherString)]
+    public void FirstOrAbsent_SourceIsNotEmpty_ExpectFirstItem(params string?[] others)
     {
-        var sourceBuilder = FlatArray<string?>.Builder.OfLength(others.Length + 1);
-        sourceBuilder[0] = first;
-
-        for (var i = 0; i < others.Length; i++)
-        {
-            sourceBuilder[i + 1] = others[i];
-        }
-
-        var source = sourceBuilder.MoveToArray();
+        var source = others.ToFlatArray();
 
         var actual = source.FirstOrAbsent();
-        var expected = Optional.Present(first);
+        var expected = others[0];
 
         Assert.Equal(expected, actual);
     }

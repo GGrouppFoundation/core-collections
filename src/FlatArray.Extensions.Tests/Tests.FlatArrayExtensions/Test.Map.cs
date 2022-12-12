@@ -5,7 +5,7 @@ using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
-namespace GGroupp.Core.Collections.FlatArray.Extensions.Tests;
+namespace GGroupp.Core.Collections.Tests;
 
 partial class FlatArrayExtensionsTest
 {
@@ -25,9 +25,9 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void Map_SourceIsEmpty_ExpectDefault()
+    public void Map_SourceIsDefault_ExpectDefault()
     {
-        var source = FlatArray<RecordStruct>.Empty;
+        var source = default(FlatArray<RecordStruct>);
         var actual = source.Map(Map);
 
         var expected = default(FlatArray<RefType>);
@@ -39,7 +39,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void Map_SourceIsNotEmpty_ExpectMappedValues()
+    public void Map_SourceIsNotDefault_ExpectMappedValues()
     {
         var mapper = new Dictionary<string, RecordType>
         {

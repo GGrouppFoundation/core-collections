@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using PrimeFuncPack.UnitTest;
 using Xunit;
 using static PrimeFuncPack.UnitTest.TestData;
 
-namespace GGroupp.Core.Collections.FlatArray.Extensions.Tests;
+namespace GGroupp.Core.Collections.Tests;
 
 partial class FlatArrayExtensionsTest
 {
