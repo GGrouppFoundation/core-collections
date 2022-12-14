@@ -23,4 +23,23 @@ partial class FlatArrayExtensions
 
         return result;
     }
+
+    public static FlatArray<TResult> Map<TSource, TResult>(this FlatArray<TSource> source, Func<TSource, int, TResult> map)
+    {
+        ArgumentNullException.ThrowIfNull(map);
+
+        if (source.IsEmpty)
+        {
+            return default;
+        }
+
+        var result = new TResult[source.Length];
+
+        for (var i = 0; i < source.Length; i++)
+        {
+            result[i] = map.Invoke(source[i], i);
+        }
+
+        return result;
+    }
 }
