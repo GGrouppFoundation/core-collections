@@ -15,13 +15,14 @@ partial class FlatArrayExtensionsTest
     public void Map_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new FlatArray<int>(PlusFifteen, Zero, MinusOne);
+        Func<int, RecordType> map = null!;
 
         var ex = Assert.Throws<ArgumentNullException>(Test);
         Assert.Equal("map", ex.ParamName);
 
         void Test()
             =>
-            _ = source.Map<int, RecordType>(null!);
+            _ = source.Map(map);
     }
 
     [Fact]
