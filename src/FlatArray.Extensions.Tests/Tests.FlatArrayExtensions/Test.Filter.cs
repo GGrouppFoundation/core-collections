@@ -11,7 +11,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void Filter_PredicateIsNull_ExpectArgumentNullException(bool isSourceDefault)
+    public static void Filter_PredicateIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new FlatArray<string>(SomeString, LowerSomeString);
 
@@ -24,7 +24,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void Filter_SourceIsEmpty_ExpectDefault()
+    public static void Filter_SourceIsEmpty_ExpectDefault()
     {
         var source = FlatArray<RecordType>.Empty;
         var actual = source.Filter(Predicate);
@@ -38,7 +38,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void Filter_SourceIsNotEmpty_ExpectFilteredValues()
+    public static void Filter_SourceIsNotEmpty_ExpectFilteredValues()
     {
         var mapper = new Dictionary<int, bool>
         {

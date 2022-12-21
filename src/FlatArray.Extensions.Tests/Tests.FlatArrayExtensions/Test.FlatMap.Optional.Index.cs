@@ -12,7 +12,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void FlatMapWithOptionalWithIndex_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
+    public static void FlatMapWithOptionalWithIndex_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new FlatArray<bool?>(true, false, null);
         Func<bool?, int, Optional<RefType>> map = null!;
@@ -26,7 +26,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FlatMapWithOptionalWithIndex_SourceIsDefault_ExpectDefault()
+    public static void FlatMapWithOptionalWithIndex_SourceIsDefault_ExpectDefault()
     {
         var source = default(FlatArray<RecordType>);
         var actual = source.FlatMap(Map);
@@ -40,7 +40,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FlatMapWithOptionalWithIndex_SourceIsNotDefault_ExpectMappedValues()
+    public static void FlatMapWithOptionalWithIndex_SourceIsNotDefault_ExpectMappedValues()
     {
         var mapper = new Dictionary<string, Optional<RecordType?>>
         {

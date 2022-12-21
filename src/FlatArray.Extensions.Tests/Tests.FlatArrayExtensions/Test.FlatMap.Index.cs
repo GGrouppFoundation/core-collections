@@ -12,7 +12,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void FlatMapWithIndex_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
+    public static void FlatMapWithIndex_MapArgumentIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new FlatArray<long>(long.MinValue, long.MaxValue);
         Func<long, int, FlatArray<object>> map = null!;
@@ -26,7 +26,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FlatMapWithIndex_SourceIsDefault_ExpectDefault()
+    public static void FlatMapWithIndex_SourceIsDefault_ExpectDefault()
     {
         var source = default(FlatArray<StructType>);
         var actual = source.FlatMap(Map);
@@ -40,7 +40,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FlatMapWithIndex_SourceIsNotDefault_ExpectMappedValues()
+    public static void FlatMapWithIndex_SourceIsNotDefault_ExpectMappedValues()
     {
         StructType? nullItem = null;
 

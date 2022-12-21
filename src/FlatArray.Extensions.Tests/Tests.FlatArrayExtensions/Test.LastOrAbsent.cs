@@ -8,7 +8,7 @@ namespace GGroupp.Core.Collections.Tests;
 partial class FlatArrayExtensionsTest
 {
     [Fact]
-    public void LastOrAbsent_SourceIsEmpty_ExpectAbsent()
+    public static void LastOrAbsent_SourceIsEmpty_ExpectAbsent()
     {
         var source = FlatArray<RecordType?>.Empty;
 
@@ -22,7 +22,7 @@ partial class FlatArrayExtensionsTest
     [InlineData(Zero)]
     [InlineData(MinusFifteen, One)]
     [InlineData(null, MinusFifteen, Zero, PlusFifteen)]
-    public void LastOrAbsent_SourceIsNotEmpty_ExpectLastItem(params int?[] others)
+    public static void LastOrAbsent_SourceIsNotEmpty_ExpectLastItem(params int?[] others)
     {
         var source = others.ToFlatArray();
 
