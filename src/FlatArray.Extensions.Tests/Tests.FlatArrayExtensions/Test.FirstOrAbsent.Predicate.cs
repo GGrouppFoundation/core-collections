@@ -11,7 +11,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void FirstOrAbsentWithPredicate_PredicateIsNull_ExpectArgumentNullException(bool isSourceDefault)
+    public static void FirstOrAbsentWithPredicate_PredicateIsNull_ExpectArgumentNullException(bool isSourceDefault)
     {
         var source = isSourceDefault ? default : new FlatArray<int?>(null, MinusOne);
 
@@ -24,7 +24,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FirstOrAbsentWithPredicate_SourceIsEmpty_ExpectAbsent()
+    public static void FirstOrAbsentWithPredicate_SourceIsEmpty_ExpectAbsent()
     {
         var source = FlatArray<StructType>.Empty;
 
@@ -39,7 +39,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FirstOrAbsentWithPredicate_AllConditionsAreFalse_ExpectAbsent()
+    public static void FirstOrAbsentWithPredicate_AllConditionsAreFalse_ExpectAbsent()
     {
         var source = new FlatArray<RecordStruct>(SomeTextRecordStruct, AnotherTextRecordStruct);
 
@@ -54,7 +54,7 @@ partial class FlatArrayExtensionsTest
     }
 
     [Fact]
-    public void FirstOrAbsentWithPredicate_NotAllConditionsAreFalse_ExpectFirstSuccessItem()
+    public static void FirstOrAbsentWithPredicate_NotAllConditionsAreFalse_ExpectFirstSuccessItem()
     {
         var mapper = new Dictionary<RecordType, bool>
         {

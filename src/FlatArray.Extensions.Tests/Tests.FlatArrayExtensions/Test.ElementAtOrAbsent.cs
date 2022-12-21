@@ -11,7 +11,7 @@ partial class FlatArrayExtensionsTest
     [InlineData(MinusOne)]
     [InlineData(Zero)]
     [InlineData(PlusFifteen)]
-    public void ElementAtOrAbsent_SourceIsEmpty_ExpectAbsent(int index)
+    public static void ElementAtOrAbsent_SourceIsEmpty_ExpectAbsent(int index)
     {
         var source = FlatArray<StructType?>.Empty;
 
@@ -24,7 +24,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(-1, SomeString)]
     [InlineData(3, AnotherString, LowerAnotherString, UpperSomeString)]
-    public void ElementAtOrAbsent_IndexIsOutOfRange_ExpectAbsent(int index, params string?[] items)
+    public static void ElementAtOrAbsent_IndexIsOutOfRange_ExpectAbsent(int index, params string?[] items)
     {
         var source = FlatArray<string?>.From(items);
 
@@ -37,7 +37,7 @@ partial class FlatArrayExtensionsTest
     [Theory]
     [InlineData(0, EmptyString)]
     [InlineData(2, SomeString, WhiteSpaceString, null, AnotherString)]
-    public void ElementAtOrAbsent_IndexIsInRange_ExpectPresentItemByIndex(int index, params string?[] items)
+    public static void ElementAtOrAbsent_IndexIsInRange_ExpectPresentItemByIndex(int index, params string?[] items)
     {
         var source = FlatArray<string?>.From(items);
 
