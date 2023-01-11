@@ -13,15 +13,15 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var result = new TResult[source.Length];
+        var builder = FlatArray<TResult>.Builder.OfLength(source.Length);
 
         for (var i = 0; i < source.Length; i++)
         {
             var sourceItem = source[i];
-            result[i] = map.Invoke(sourceItem);
+            builder[i] = map.Invoke(sourceItem);
         }
 
-        return result;
+        return builder.MoveToFlatArray();
     }
 
     public static FlatArray<TResult> Map<TSource, TResult>(this FlatArray<TSource> source, Func<TSource, int, TResult> map)
@@ -33,13 +33,13 @@ partial class FlatArrayExtensions
             return default;
         }
 
-        var result = new TResult[source.Length];
+        var builder = FlatArray<TResult>.Builder.OfLength(source.Length);
 
         for (var i = 0; i < source.Length; i++)
         {
-            result[i] = map.Invoke(source[i], i);
+            builder[i] = map.Invoke(source[i], i);
         }
 
-        return result;
+        return builder.MoveToFlatArray();
     }
 }

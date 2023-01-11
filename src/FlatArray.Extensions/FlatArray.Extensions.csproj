@@ -8,11 +8,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RootNamespace>GGroupp</RootNamespace>
     <AssemblyName>GGroupp.Core.Collections.FlatArray.Extensions</AssemblyName>
-    <Version>1.7.0</Version>
+    <Version>1.8.0-build.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PrimeFuncPack.Core.FlatArray" Version="1.0.0" />
+    <PackageReference Include="PrimeFuncPack.Core.FlatArray" Version="1.1.0" />
     <PackageReference Include="PrimeFuncPack.Core.Optional" Version="2.1.0" />
   </ItemGroup>
 

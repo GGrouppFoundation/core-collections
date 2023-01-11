@@ -26,7 +26,7 @@ partial class FlatArrayExtensions
                 continue;
             }
 
-            return Optional.Present(item);
+            return item;
         }
 
         return default;
