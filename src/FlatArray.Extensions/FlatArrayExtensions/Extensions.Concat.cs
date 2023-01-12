@@ -16,19 +16,19 @@ partial class FlatArrayExtensions
             return source;
         }
 
-        var result = new T[source.Length + other.Length];
+        var builder = FlatArray<T>.Builder.OfLength(source.Length + other.Length);
 
         for (var i = 0; i < source.Length; i++)
         {
-            result[i] = source[i];
+            builder[i] = source[i];
         }
 
         for (var i = 0; i < other.Length; i++)
         {
-            result[source.Length + i] = other[i];
+            builder[source.Length + i] = other[i];
         }
 
-        return result;
+        return builder.MoveToFlatArray();
     }
 
     public static FlatArray<T> Concat<T>(this FlatArray<T> source, params T[] other)
